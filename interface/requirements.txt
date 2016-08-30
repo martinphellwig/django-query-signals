@@ -1,0 +1,4 @@
+coverage<4.0.0
+pylint
+ipython
+django-integrator

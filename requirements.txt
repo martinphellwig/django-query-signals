@@ -1,0 +1,2 @@
+-r interface/requirements.txt
+-r django_query_signals/requirements.txt
