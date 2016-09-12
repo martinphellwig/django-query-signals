@@ -24,14 +24,16 @@ METHODS = {'bulk_create':QuerySet.bulk_create,
            'update':QuerySet.update}
 
 def _bulk_create(self, objs, batch_size=None):
-    _ = {'self':self, 'objs':objs, 'batch_size':batch_size}
+    _ = {'self':self, 'objs':objs, 'batch_size':batch_size,
+         'method':'bulk_create'}
     pre_bulk_create.send(sender=self.model, args=_)
     _['return'] = METHODS['bulk_create'](_['self'], _['objs'], _['batch_size'])
     post_bulk_create.send(sender=self.model, args=_)
     return _['return']
 
 def _get_or_create(self, defaults=None, **kwargs):
-    _ = {'self':self, 'defaults':defaults, 'kwargs':kwargs}
+    _ = {'self':self, 'defaults':defaults, 'kwargs':kwargs,
+         'method':'get_or_create'}
     pre_get_or_create.send(sender=self.model, args=_)
     _['return'] = METHODS['get_or_create'](
                                         _['self'], _['defaults'], **_['kwargs'])
@@ -39,7 +41,8 @@ def _get_or_create(self, defaults=None, **kwargs):
     return _['return']
 
 def _update_or_create(self, defaults=None, **kwargs):
-    _ = {'self':self, 'defaults':defaults, 'kwargs':kwargs}
+    _ = {'self':self, 'defaults':defaults, 'kwargs':kwargs,
+         'method':'update_or_create'}
     pre_update_or_create.send(sender=self.model, args=_)
     _['return'] = METHODS['update_or_create'](
                                         _['self'], _['defaults'], **_['kwargs'])
@@ -47,14 +50,14 @@ def _update_or_create(self, defaults=None, **kwargs):
     return _['return']
 
 def _delete(self):
-    _ = {'self':self}
+    _ = {'self':self, 'method':'delete'}
     pre_delete.send(sender=self.model, args=_)
     _['return'] = METHODS['delete'](_['self'])
     post_delete.send(sender=self.model, args=_)
     return _['return']
 
 def _update(self, **kwargs):
-    _ = {'self':self, 'kwargs':kwargs}
+    _ = {'self':self, 'kwargs':kwargs, 'method':'update'}
     pre_update.send(sender=self.model, args=_)
     _['return'] = METHODS['update'](_['self'], **_['kwargs'])
     post_update.send(sender=self.model, args=_)
