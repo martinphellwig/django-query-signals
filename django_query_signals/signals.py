@@ -23,11 +23,11 @@ METHODS = {'bulk_create':QuerySet.bulk_create,
            'delete':QuerySet.delete,
            'update':QuerySet.update}
 
-def _bulk_create(self, objs, batch_size=None):
+def _bulk_create(self, objs, batch_size=None, ignore_conflicts=True):
     _ = {'self':self, 'objs':objs, 'batch_size':batch_size,
-         'method':'bulk_create'}
+         'ignore_conflicts':ignore_conflicts, 'method':'bulk_create'}
     pre_bulk_create.send(sender=self.model, args=_)
-    _['return'] = METHODS['bulk_create'](_['self'], _['objs'], _['batch_size'])
+    _['return'] = METHODS['bulk_create'](_['self'], _['objs'], _['batch_size'], _['ignore_conflicts'])
     post_bulk_create.send(sender=self.model, args=_)
     return _['return']
 
