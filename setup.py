@@ -9,7 +9,7 @@ DESCRIPTION = 'Django Query Signals'
 VERSION = '0.0.2'
 AUTHOR = 'Martin P. Hellwig'
 AUTHOR_EMAIL = 'martin.hellwig@gmail.com'
-URL_MAIN = "https://repository.example.com/" + NAME + '/'
+URL_MAIN = "https://github.com/martinphellwig/" + NAME + '/'
 URL_DOWNLOAD = URL_MAIN + 'download/' + VERSION + '.zip'
 
 KEYWORDS = [
